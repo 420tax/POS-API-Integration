@@ -158,3 +158,17 @@ Evidence: Page text and examples supplied by user October 23, 2026; page labels 
 A future extractor should handle request signing internally. Staff should select client and date range and run a documented command or launcher; routine use should not require writing Python or generating tokens manually. This is a design goal, not an implemented feature.
 
 Next research topic: Historical coverage, beginning with the close-date ticket endpoint and distinguishing it from last-updated retrieval limits.
+
+## Step 4 — Historical coverage: close-date endpoint
+
+Source: https://code.treez.io/reference/ticket-get-by-close-date
+Evidence: Page text and displayed test response supplied by user October 23, 2026.
+
+- GET /dispensary/v3/{dispensary}/ticket/closedate/{date}/page/{page}/pagesize/{pagesize} retrieves tickets closed on a specified date.
+- Required path values: dispensary, date (YYYY-MM-DD), page, and pagesize.
+- Optional full_decimals requests unrounded dollar amounts where applicable. include_cost requires permission.
+- The reviewed page does not state earliest available date, retention period, maximum page size, starting page number, or pagination completion rules. A full-year backfill is therefore not yet confirmed.
+- The user-displayed Try It request returned HTTP 401 and contained literal placeholder path values (dispensary, date, page, pagesize), with no Authorization header shown. This is not a successful data extraction or a test of historical retention; the exact authentication failure was not diagnosed.
+- The displayed error object is not a ticket response schema. The collapsed 200 response is described only as an object in the supplied text; no successful response fields were supplied.
+
+Next website check: Get by last updated date, to establish its distinct date restrictions. Do not retry live calls until valid authorized access and actual request parameters are available.

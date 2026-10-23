@@ -226,3 +226,32 @@ The GET example is an UNPAID delivery order in AWAITING_PROCESSING with no close
 Do not copy the full sample into implementation templates: it includes customer/delivery/employee details and a webhook shared_secret field. No values from those fields were committed. Production raw-response retention must account for unnecessary personal and secret fields; the earlier raw-JSON preservation proposal remains subject to permitted storage, encryption, and minimization design.
 
 Next website research: Ticket Parameters Explained field definitions, particularly inventory_id, inventory_batch_id, price_sell, price_total, quantity, refund_reason, and original_ticket_id. Obtain V3 completed medical-sale and refund schemas before finalizing extraction design.
+
+## Step 5 continued — Ticket field definitions
+
+Source: https://code.treez.io/docs/parameters-explained-customer-api-1
+Despite the URL name, the uploaded page identifies itself as Ticket API Parameters Explained. User-provided text reviewed October 23, 2026; metadata updatedAt 2026-02-25. Current V3 applicability remains to be tested.
+
+| Field | Published definition / consequence |
+| --- | --- |
+| ticket_id | Unique ticket identifier. |
+| order_number | Customer-facing receipt number. |
+| ticket_patient_type | Patient type at the time sale was completed; sample gives ADULT but does not enumerate medical values. |
+| date_closed | Completion, abandonment, or cancellation date. A close-date result is not necessarily a completed sale; determine status rules before counting revenue. |
+| order_status | Includes COMPLETED (completed and paid) and CANCELED, alongside fulfillment states. |
+| payment_status | Enumerates PAID, UNPAID, AUTHORIZED, REFUNDED. |
+| original_ticket_id | Read-only parent ticket reference returned for refunded tickets. This explicitly documents refund-related response data, beyond merely null fields in the example. Complete endpoint coverage, partial refunds, signs, and dates remain untested. |
+| refund_reason | Read-only reason entered during a POS refund. |
+| quantity | Number of units for packaged products; grams for bulk flower. Do not apply a universal package-weight multiplier. |
+| product_amount / product_unit | Product contents amount and its unit. state_tracking_uom is the state tracking unit, not the package label. |
+| price_sell | Total across all units of the product excluding taxes: a line amount, not a unit price. Do not multiply by quantity again. Discount treatment and Net Sales report equivalence still require validation. |
+| price_total | Line total including discounts and tax. |
+| sub_total | Sum of line items and fees excluding tax per definition. Prior GET example has sub_total 8, tax 15.1, fee 5, total 28.1, suggesting fees are outside its sub_total. This conflicts with the definition; resolve using completed V3 records and report control totals. |
+| discounts.savings | Dollar savings; discount_amount can instead be a percentage depending on discount_method. Preserve method and category. |
+| payments | Documents payment_id, payment_source, payment_method, amount_paid, payment_date. Refund payment method is described as always CASH; verify for actual client records rather than assuming this reflects economic refund tender. |
+
+Unresolved identifiers: inventory_id and inventory_batch_id from the sample have no definitions in this supplied table. No explicit METRC package label, selling-license number, or unique ticket-line ID is established.
+
+Other discrepancies: discount categories are written differently in this table versus sample JSON; payment_date is described as yyyy-mm-dd but its example includes time and offset. Preserve source values and verify actual schemas. Preview tax calculations may differ from final tickets due to inventory batch changes; use actual completed records for reconciliation, not preview requests.
+
+Next research: Current inventory reference, Get package label by retail id, to determine whether sales inventory identifiers can join to historical METRC package labels and whether premium inventory access is required.

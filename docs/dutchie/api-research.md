@@ -38,7 +38,7 @@ The [live API specification](https://api.pos.dutchie.com/swagger/v001/swagger.js
 
 Published transaction schema includes return/void indicators, original-transaction links, medical classification and rounding fields. Line identifiers are not guaranteed unique outside their transaction. Use a location/transaction/line composite candidate key and verify persistence. Preserve unaggregated detail; confirm RollupLineItems=false.
 
-The specification lists 120/min for register-transactions and closing-report, 600/min for transactions and 480/min for cash-summary. These endpoint values differ from the general guide; verify effective limits. No complete-year guarantee or proven historical sales-line-to-METRC-tag join was established.
+The specification lists 120/min for register-transactions and closing-report, 600/min for transactions and 480/min for cash-summary. These endpoint values differ from the general guide; verify effective limits. A historical join had not yet been established in this initial review; see the deeper research below for the direct package field subsequently identified.
 
 ## JSON, Python and Excel
 
@@ -79,3 +79,57 @@ See [action list](TODO.md), [call sheet](call-sheet.md) and [pilot specification
 ## Research limitations
 
 The public specification was readable through web retrieval. A direct programmatic download attempt returned non-JSON and could not be parsed; no downloaded schema or SDK was generated. Standalone guides and the live specification differ in authentication and limits. Those are unresolved documentation discrepancies, not tested behavior. No production data was accessed.
+
+## Deeper public research — October 23, 2026
+
+The initial handoff was premature: published fields and alternate extraction options can be investigated without a vendor call. The findings below narrow the remaining questions.
+
+### Sales-line evidence now identified
+
+The [live specification](https://api.pos.dutchie.com/swagger/v001/swagger.json) identifies `TransactionItem.packageId` as a state-tracking package identifier; `sourcePackageId` represents lineage. Both are nullable. This supplies a direct candidate field; historical population and Michigan METRC equivalence still require testing.
+
+It describes `totalPrice` as tax/discount inclusive and `unitPrice` as before tax/discount. Do not treat totalPrice as net sales or multiply it by quantity. Verify reconciliation before adopting any formula.
+
+### A simpler extraction option: scheduled Excel reports
+
+The [Closing Report guide](https://support.dutchie.com/hc/en-us/articles/16319681473171-View-closing-report-breakdown-in-Dutchie-POS) explicitly supports scheduled delivery by email in Excel format. The documented setup is Reports > Configure > Add Schedule, then add Closing Report and recipients. This could reduce manual downloading before a custom API extractor exists.
+
+The same guide says detailed Closing Report data is limited to seven days and describes the report as a snapshot that may differ from other reports. Distinguish Backoffice detail limits from API retention. Preserve dated controls and account for later changes; scheduling alone does not solve corrections.
+
+### Existing accounting-oriented report
+
+The [official report catalog](https://support.dutchie.com/hc/en-us/articles/12882401662995-What-kinds-of-reports-can-I-run-in-Dutchie-POS-Backoffice) lists a **Journal Entry** report with payment methods, tax rates and category sales split between medical/recreational. It also lists historical inventory-cost snapshots and settlement reports. These are candidates for comparison with our existing daily sales workbook; their availability does not establish a QBO-ready import format or exposure through the public API.
+
+### MCP price is publicly answered
+
+The [Dutchie MCP page](https://dutchie.com/business/dutchie-mcp) says Dutchie charges nothing extra for MCP connectivity; the separate AI provider's standard charges remain. The page is labeled preview/early access. The [support article](https://support.dutchie.com/hc/en-us/articles/53914774237843-Dutchie-MCP-what-it-is-and-how-to-connect-your-AI-assistant) describes current read-only access coordinated through the account team. This is an answer about MCP pricing, not a quote for POS API partner access.
+
+Marketing describes permission-based access and actions, while current support limits functionality to reads and the technical setup page describes a bearer MCP key. Use the surface-specific technical instructions and verify provisioned capabilities. Do not infer present write access from marketing language.
+
+### Published merchant API terms answer revocation
+
+[Service-Specific Terms](https://dutchie.com/business/legal/service-specific-terms), updated October 8, 2026, section 9, expressly address discretionary provisioning, third-party integrations, variable limits, and revocation/suspension of API keys. Customers may request revocation by contacting Dutchie. Thus, key revocation is documented; replacement logistics and firm eligibility remain follow-up items.
+
+Section 10 treats MCP as API access and warns that it can expose sensitive data without field-level masking. Scope requested information to accounting needs. Nothing here proves a client account's actual permissions or substitutes for client authorization.
+
+### Revised next steps without calling Dutchie
+
+1. Compare a sample Journal Entry report and scheduled Closing Report output with the existing daily-sales entries.
+2. Complete a field-mapping document using the identified package field, preserving unknowns for sample validation.
+3. Prepare a bounded request plan from the published transaction/report interfaces.
+4. Design QBO posting from existing reviewed JE files independently of Dutchie access.
+
+These are available development/review activities, not reasons to require a call first. Client samples, credentials and access approvals are separate evidence.
+
+### What still genuinely needs account-specific evidence
+
+- Firm eligibility and the applicable current POS API agreement/price.
+- Provisioned endpoint permissions and Integrator Key transition timing.
+- Earliest retained history, complete returns/deletion behavior, response truncation and populated historical package/license fields.
+- Agreement of actual client responses with report controls.
+
+Some may be resolved by authorized read-only testing rather than calls. Request vendor clarification only for gaps that public documentation and testing do not settle.
+
+### Additional retrieval limits
+
+The documentation index, full-text index and Markdown alternate were not retrievable through the public web tool; ordinary and indexed official pages were used instead. No authenticated customer data was queried.

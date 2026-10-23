@@ -94,3 +94,16 @@ Next human action: James or designated staff should contact Treez using sections
 - [ ] After vendor answers arrive, map verified API fields to this specification and resolve the listed gaps before coding.
 
 Vendor/client contact tasks above remain open; recording this specification does not mean access or integration testing is complete.
+
+## Offline CSV preparation pilot completed
+
+- [x] Locate existing Treez/METRC workbook and inspect actual source headers.
+- [x] Build preparation utility and Windows prompted launcher: [pilot instructions](../../tools/treez/csv-preparation/README.md).
+- [x] Process all five populations without modifying source workbook or silently removing nonblank records; independently verify output counts.
+- [x] Test distinct sale preservation, decimal text, failure reporting and refusal to overwrite runs.
+- [ ] Staff/James: test launcher on the intended Windows computer after Python/openpyxl are configured. Provide any error message; no Python editing required.
+- [ ] Review Non-METRC preparation issues before treating those rows as clean transactions; review December 25 no-activity date against store records.
+- [ ] Obtain original monthly Treez CSV layout before implementing a raw monthly-file append/coverage feature; the current CSV route expects already-combined population files.
+- [ ] Continue transaction reconciliation separately; the preparation pilot does not match records or establish API field equivalence.
+
+See [validation](../../tools/treez/csv-preparation/validation.md). API access remains dependent on vendor/client tasks, but offline preparation has now been implemented and exercised with existing data.

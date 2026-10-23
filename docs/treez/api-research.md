@@ -269,3 +269,20 @@ Evidence: User-supplied reference text and displayed example October 23, 2026; p
 - Still unresolved: whether ticket inventory_id or inventory_batch_id equals retail_id; whether returned labels are METRC package labels versus retail/QR labels; historical/as-of-sale mapping; depleted/archived inventory access; package splits/merges; and fee applicability. The Inventory navigation money symbol is a pricing signal, not a quote or proof the earlier Stock API fee applies here.
 
 Next research: Get retail ids by package label (reverse lookup), whose description may identify the package label and clarify identifier relationships. Follow with Get by package if necessary.
+
+## Step 6 continued — Independent inventory documentation review
+
+Reviewed October 23, 2026:
+
+- https://code.treez.io/reference/dispensary-inventory-retail_id-by-package
+- https://code.treez.io/reference/dispensary-inventory-get
+
+The reverse lookup explicitly defines label as a METRC package label. Route: GET /dispensary/v3/{dispensary}/inventory/retail_id/label/{label}. This confirms a documented lookup from METRC package labels to retail IDs. It does not establish which ticket field contains that retail ID or historical mapping completeness.
+
+Get by package uses GET /dispensary/v3/{dispensary}/packages. At least one filter is required from id, productCategory, productId, productBrand, productName, location, invoiceId. id is described as the package's state tracking ID. Other documented filters include inventoryType (ADULT, MEDICAL, ALL), stateTrackingRetailLicenseNumber, invoice acceptance dates, sellable, and includeOutOfStockLocations.
+
+These filters show medical inventory and retail-license filtering capabilities; they do not establish the selling license or package on each historical ticket line. includeOutOfStockLocations is promising for depleted stock but is not proof that archived packages or historical retail-ID mappings remain available.
+
+Two web search engines returned no matches linking ticket inventory_id/inventory_batch_id to METRC or retail IDs. This limited search result is not proof the relationship is undocumented everywhere. A successful V3 ticket response/schema or vendor clarification is still needed.
+
+Topic outcome: METRC-specific inventory lookup exists; an end-to-end historical sales-line-to-tag join remains unverified. No task for staff is required to retrieve these public pages. Retain unresolved join, history, cardinality, and pricing questions for consolidated follow-up.

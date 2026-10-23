@@ -187,3 +187,19 @@ Source: User-supplied V3 Get by last updated date page, October 23, 2026 (linked
 Potential future use: capture changed tickets after an extraction checkpoint, subject to verified semantics, pagination stability, and lookback restrictions. Initial full-year extraction remains dependent on verified backfill coverage.
 
 Next website evidence: Ticket API overview/general limitations, followed by a published sample ticket response. Record legacy-versus-V3 applicability explicitly.
+
+## Step 4 continued — Ticket API overview limitations
+
+Source: https://code.treez.io/docs/ticket-apis
+Evidence: LIMITATIONS section supplied by user October 23, 2026. Legacy endpoint links remain in this documentation; confirm applicability to current V3.
+
+| Published limitation | Reconciliation implication |
+| --- | --- |
+| Last-updated retrieval only goes back 30 days; older requests fail | Not an established method for initial full-year backfill. Confirm V3 behavior and keep any future incremental extraction within the verified lookback. |
+| Maximum 50 results per request | Retrieve all pages; confirm V3 maximum and completion rules. This is a record count, not a date-range limit. |
+| 10 TPS per Treez location | Published rate is 10 transactions/requests per second per location; verify vendor interpretation and V3 applicability, throttle below the ceiling, and handle rate-limit responses. |
+| Refunds cannot be handled or processed using Ticket API | Wording concerns refund functionality; it does not establish whether existing refunds are present in GET responses. Historical refund retrieval remains unresolved. |
+
+Other listed limitations concern writing tickets: updates after payment, payment during COMPLETED transition, separate product/payment requests, unsupported partial payments, item-level rather than cart-level discount application, and delivery-zone configuration not enforced by Create Ticket. These are not evidence that existing partial tenders, cart discounts, or returns are absent from read responses.
+
+No full-year close-date retention limit is stated in this supplied section. Full-year retrieval remains unconfirmed. Next research: published Ticket API sample responses to inspect transaction IDs, sales lines, package tags, timestamps, and return representation.

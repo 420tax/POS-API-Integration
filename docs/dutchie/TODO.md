@@ -82,3 +82,16 @@ Owner: technical implementer with James's accounting mapping/review.
 - [ ] Retain manual CSV imports as fallback.
 
 Return vendor answers to this repository as approved nonconfidential summaries. Keep client data, credentials and confidential quotes outside Git.
+
+## Additional public research and work available without a call
+
+- [x] Identify a direct state-tracking package field; see research addendum.
+- [x] Establish published no-extra-charge MCP pricing separately from POS API pricing.
+- [x] Identify scheduled Excel Closing Reports and the existing Journal Entry report.
+- [x] Establish published API-key revocation route in merchant terms.
+- [ ] Compare client samples of Journal Entry and Closing Reports with existing daily JE output.
+- [ ] Evaluate scheduled report delivery as an interim extraction method.
+- [ ] Map documented candidate fields before vendor outreach; use authorized testing to resolve sample-dependent gaps.
+- [ ] Keep questions about populated historical values, actual permissions and full-year completeness open until observed.
+
+The public review does not require a call before all further progress. Read the research addendum before using the original question list.

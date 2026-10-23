@@ -255,3 +255,17 @@ Unresolved identifiers: inventory_id and inventory_batch_id from the sample have
 Other discrepancies: discount categories are written differently in this table versus sample JSON; payment_date is described as yyyy-mm-dd but its example includes time and offset. Preserve source values and verify actual schemas. Preview tax calculations may differ from final tickets due to inventory batch changes; use actual completed records for reconciliation, not preview requests.
 
 Next research: Current inventory reference, Get package label by retail id, to determine whether sales inventory identifiers can join to historical METRC package labels and whether premium inventory access is required.
+
+## Step 6 — Package label lookup by retail ID
+
+Source: https://code.treez.io/reference/dispensary-inventory-label-by-retail_id
+Evidence: User-supplied reference text and displayed example October 23, 2026; page labels itself updated 16 days ago. No authenticated client lookup was performed.
+
+- GET /dispensary/v3/{dispensary}/inventory/label/retail_id?retail_id={value}, as shown by the generated curl example.
+- Reference lists dispensary and retail_id as required Path Params, but curl puts retail_id in the query string. Treat this as a documentation discrepancy and verify actual parameter placement.
+- Success schema includes resultCode, resultReason, resultDetail, and data with parent_code and child_code arrays of strings. HTTP 400 and 404 are also listed.
+- The displayed example contains a parent string prefixed RETAIL ID and a child URL. It does not demonstrate a METRC package tag. The title alone is insufficient to establish the meaning of either code array.
+- Multiple array values are possible; do not assume a one-to-one join or select the first value silently.
+- Still unresolved: whether ticket inventory_id or inventory_batch_id equals retail_id; whether returned labels are METRC package labels versus retail/QR labels; historical/as-of-sale mapping; depleted/archived inventory access; package splits/merges; and fee applicability. The Inventory navigation money symbol is a pricing signal, not a quote or proof the earlier Stock API fee applies here.
+
+Next research: Get retail ids by package label (reverse lookup), whose description may identify the package label and clarify identifier relationships. Follow with Get by package if necessary.

@@ -203,3 +203,26 @@ Evidence: LIMITATIONS section supplied by user October 23, 2026. Legacy endpoint
 Other listed limitations concern writing tickets: updates after payment, payment during COMPLETED transition, separate product/payment requests, unsupported partial payments, item-level rather than cart-level discount application, and delivery-zone configuration not enforced by Create Ticket. These are not evidence that existing partial tenders, cart discounts, or returns are absent from read responses.
 
 No full-year close-date retention limit is stated in this supplied section. Full-year retrieval remains unconfirmed. Next research: published Ticket API sample responses to inspect transaction IDs, sales lines, package tags, timestamps, and return representation.
+
+## Step 5 — Published ticket response field review
+
+Source: https://code.treez.io/docs/sample-response-3
+Evidence: User-uploaded documentation text reviewed October 23, 2026; metadata updatedAt 2026-02-25. Examples contain 2022 dates. These are documentation examples, not Five Lakes production records or a verified V3 schema.
+
+| Requirement | Fields observed | Assessment |
+| --- | --- | --- |
+| Ticket identity | ticket_id, order_number, external_order_number | Ticket identifier and receipt reference shown; stability and uniqueness scope need confirmation. |
+| Unique sales-line identity | items includes product_id, inventory_id, inventory_batch_id, size_id | No explicit unique ticket-line identifier shown. Product/inventory IDs are not substitutes for a line ID. |
+| METRC package tag | inventory_id, inventory_batch_id, inventory_barcodes, state_tracking_uom | No explicit METRC package label shown; inventory_id meaning/join path must be established. state_tracking_uom is a unit field, not a tag. |
+| Medical/adult use | ticket_patient_type and items.inventory_type are ADULT | Classification fields exist in sample; MEDICAL values, historical consistency, and selling-license number not established. |
+| Dates | date_created, last_updated_at, date_closed | Offset-bearing timestamps shown; date_closed is null. Need completed-sale examples and business-date definitions. |
+| Quantity/units | quantity, product_unit, product_amount, state_tracking_uom | Sample quantity 1 with product_amount 3.5 and GRAMS suggests package count versus contents must be distinguished. No universal multiplication rule established. |
+| Money | sub_total, discount_total, tax_total, total; item price_sell, price_total; discounts and tax arrays; fees | Definitions and report Net Sales mapping unresolved. GET example 8 + 15.1 + 5 = 28.1; discounts are already reflected somewhere and must not be subtracted twice. |
+| Returns | refund_reason, original_ticket_id | Both null; fields suggest possible linkage but do not prove historical refund retrieval or sign conventions. |
+| Payments and loyalty | payments; reward_points_earned, reward_points_used | Payments empty, points zero. Tender schema, split tenders, and redemption monetary treatment not demonstrated. |
+
+The GET example is an UNPAID delivery order in AWAITING_PROCESSING with no close date, not a completed sale. Only one item is shown, so repeated lines and package splits cannot be evaluated. The sample repeats delivery_route with different values; a production parser must detect duplicate JSON keys rather than silently assuming the sample is canonical.
+
+Do not copy the full sample into implementation templates: it includes customer/delivery/employee details and a webhook shared_secret field. No values from those fields were committed. Production raw-response retention must account for unnecessary personal and secret fields; the earlier raw-JSON preservation proposal remains subject to permitted storage, encryption, and minimization design.
+
+Next website research: Ticket Parameters Explained field definitions, particularly inventory_id, inventory_batch_id, price_sell, price_total, quantity, refund_reason, and original_ticket_id. Obtain V3 completed medical-sale and refund schemas before finalizing extraction design.

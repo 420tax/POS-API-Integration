@@ -65,3 +65,23 @@ Evidence: Full article supplied by user on October 23, 2026; consistent with the
 - Whether the separate Retail Data API follows this certificate process.
 
 These gaps are retained for the later consolidated action list. No client or vendor outreach has been performed.
+
+## Step 2 continued — Published partner onboarding
+
+Source: https://code.treez.io/page/partner-with-us
+Evidence: Page text supplied by user on October 23, 2026.
+
+The published SellTreez partner process requires:
+
+1. Submit a partner application: https://www.treez.io/partner-application
+2. Sign an MNDA and API Usage Agreement: https://code.treez.io/page/legal
+3. Receive sandbox access after signing the agreements.
+4. Provide proof of client support resources and documentation.
+5. Complete the Partner Survey: https://docs.google.com/forms/d/e/1FAIpQLSdposbpvof4pacDD9cmV4Dd95KXHAuk3QHeDAiEeZqBTdspCQ/viewform?usp=sf_link
+6. Obtain approval before clients request production access.
+
+Treez advises developing and testing in the sandbox before requesting production access. This page does not describe detailed certification test criteria or state fees. Although its heading mentions both SellTreez and Data API access, the listed procedure is explicitly labeled SellTreez; do not assume identical requirements for the Retail Data API.
+
+Documentation discrepancy: The page still says customers request an API Key after approval and links to an older support article. Current access guidance instead requires V3 certificate registration and authorization. Preserve the onboarding requirements as published, but use current V3 guidance for authentication; ask Treez to confirm the current onboarding sequence.
+
+Next website research: Read the API Usage Agreement for eligibility, permitted accounting use, client authorization, fees, data handling, and support obligations. No agreements have been accepted and no application or survey has been submitted.

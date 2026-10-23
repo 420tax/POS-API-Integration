@@ -300,3 +300,30 @@ The history endpoint GET /dispensary/v3/{dispensary}/ticket/history/{ticket_id} 
 The official order-number page's search-indexed response schema additionally exposes refund_ticket_ids, items[].id, and items[].reward_dollars, unlike the older uploaded sample. Direct page retrieval returns a reduced view without the expanded schema. Treat these as published schema candidates requiring live verification: items[].id may supply the missing line identifier, but its uniqueness scope and persistence are undocumented; refund_ticket_ids suggests original-to-refund linkage, but its type, completeness, and partial-refund behavior must be tested. reward_dollars needs definition and reconciliation to discounts and Net Sales.
 
 Updated status: Earlier findings that no line ID was shown refer to the uploaded older sample, not an assertion that current V3 lacks one. No production extraction has occurred. The data route remains promising, with historical coverage, METRC joins, and refund/correction completeness as validation gates.
+
+## Step 8 — Report definitions, rounding, and update reliability
+
+Official sources reviewed October 23, 2026:
+
+- https://support.treez.io/en/articles/9129172-retail-analytics-glossary-for-the-latest-version-of-treez
+- https://support.treez.io/en/articles/9129271-selltreez-why-does-my-cash-handling-total-look-different-from-my-product-report-total
+- https://support.treez.io/en/articles/9129145-retail-analytics-sales-dashboard
+- https://code.treez.io/docs/faqs
+- https://code.treez.io/docs/faq-webhooks
+- https://code.treez.io/docs/using-webhooks
+
+Treez defines Net Sales as Gross Sales minus Returns and Discounts, and Gross Receipts as Net Sales plus Taxes. Its rounding article distinguishes unrounded Product Report amounts from rounded receipt/Cash Handling amounts, including fractional-penny allocations of cart discounts. This explains a possible class of differences, not any particular Five Lakes variance. Compare API full_decimals output to the correct report and retain a separate rounding bridge to cash/tender controls; do not automatically write off all differences.
+
+General FAQ documents 429 OVER LIMIT responses and recommends 250–500 ms pauses and retry logic. These pages still contain legacy credential language; validate V3 limits before implementation.
+
+Ordinary Ticket Webhooks explicitly do not fire for cancellations/deletions, whereas Ticket Status Webhooks include CANCELED and other status changes. Webhooks require a configured receiver and are a possible later enhancement, not the initial backfill source or sole completeness control. Retry/delivery guarantees and refund coverage were not established.
+
+Public retrieval limits: Retail Data's linked Postman collection (https://drive.google.com/file/d/1AwHDE2G3FfZlSjI-Yf11utfjF9LqHdd-/view) returned unauthorized through public retrieval; an alternate download URL also failed. The developer index and .md alternate retrieval were unavailable; normal pages and indexed official documentation were used instead. Searches did not establish Retail Data schemas/retention, exact business-day timezone, or pagination completion semantics. These are retrieval/research gaps, not proof the capabilities do not exist.
+
+## Consolidated assessment and handoff
+
+Public documentation review covers API choices, access, published fee schedule, V3 authentication, ticket fields, quantities, dates, monetary definitions, refunds, inventory label lookups, rate limits, and update mechanisms. It is sufficient to prepare focused vendor questions, not to certify extraction completeness or select an API.
+
+Proposed architecture remains a separately operated Python extractor with secure configuration, permitted raw-source retention, consistent CSV tables, and Power Query review. Do not convert CSV to JSON merely for format changes. Preserve decimal precision, stable identifiers and separate parent/child tables; flattening discounts/taxes/payments into sales rows without care can multiply totals. Staff operation must not require writing Python.
+
+Decision gates: acceptable fees/terms; authorized read access; full-year backfill; stable ticket/line identity; historical METRC tag and license attribution; complete returns/corrections; and one-month reconciliation to source reports. Continue current CSV process until all gates pass. See [TODO.md](TODO.md) for owners, methods, questions, and evidence required. No vendor/client outreach, credential setup, paid access, or live API testing has occurred.

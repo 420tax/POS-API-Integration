@@ -127,3 +127,34 @@ Evidence: Page text supplied by user October 23, 2026; page labels itself update
 - Page links to DOMO developer documentation, an API Explorer, and a Postman collection. These may help inspect request structure and schemas, subject to availability; credentials have not been requested.
 
 Access/cost website research status: Published routes and contacts documented. CPA-firm eligibility, current quotes for both services, permissions, contract applicability, and retention remain unresolved for later outreach. Next research topic: V3 authentication, followed by endpoint-specific historical coverage.
+
+## Step 3 — V3 authentication requirements
+
+Source: https://code.treez.io/reference/authentication
+Evidence: Page text and examples supplied by user October 23, 2026; page labels itself updated 15 days ago. No keys generated and no authentication tested.
+
+### Documented requirements
+
+- Self-signed PEM X.509 certificate with a 4096-bit RSA public key. Treez recommends OpenSSL; Git for Windows includes an executable. This is a documented option, not proof it is the only Windows installation method.
+- Submit only the public .crt to api-support@treez.io. Retain the private .key securely outside Git and shared research material.
+- Treez registers the certificate, supplies a Certificate ID, and configures permitted organizations, dispensaries, and endpoints. An Organization ID identifies the target organization.
+- Sign each request separately and supply the result in the Authorization header. Documentation specifies a 30,000 millisecond TTL and says other TTL values return HTTP 400.
+- Node example fields: aud (request URL), iss (Certificate ID), oid (Organization ID), iat and exp (milliseconds), and recommended jti (unique token ID). RSA-SHA256 signs the encoded JSON object.
+- The supplied example command sets a five-year certificate duration and creates an unencrypted private key using -noenc. That is an example configuration, not an established mandatory lifetime or our approved storage design.
+- The site offers Python, Node, Java, Ruby, Go, and Postman examples and expressly labels the examples non-production-ready. Only Node and Postman example bodies were supplied in this step.
+
+### Implementation details to verify
+
+- The examples construct two dot-separated components (encoded JSON and signature), rather than the usual three-part JWT serialization. Implement the vendor's verified format; do not assume a standard JWT library's default output will work.
+- Node uses URL-safe Base64 while Postman uses ordinary Base64. Confirm accepted encoding and canonical audience URL with the validation endpoint and Treez support if necessary.
+- Postman instructions incorrectly illustrate privateKey PEM boundaries as BEGIN/END CERTIFICATE. The private signing key must be a private-key PEM, distinct from the public certificate; verify the accepted key encoding.
+- The prose describes public-key decryption; operationally the public key verifies the request signature. Do not treat the request body or token as encrypted by signing.
+- Node calls Date.now() separately for iat and exp; capture one timestamp in production so the specified TTL is exact. Maintain accurate system time.
+- Examples log signed authorization values and embed private-key material or load executable library text. Production code should avoid credential/token logging and use securely stored keys and controlled dependencies.
+- Confirm certificate expiration/rotation/revocation procedures and endpoint permissions. Authentication for the separate DOMO Retail Data API remains unconfirmed.
+
+### Proposed staff experience
+
+A future extractor should handle request signing internally. Staff should select client and date range and run a documented command or launcher; routine use should not require writing Python or generating tokens manually. This is a design goal, not an implemented feature.
+
+Next research topic: Historical coverage, beginning with the close-date ticket endpoint and distinguishing it from last-updated retrieval limits.

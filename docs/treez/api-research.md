@@ -111,3 +111,19 @@ Relevant published provisions for follow-up:
 - Section 6.2 specifies security-incident reporting within three business days. Section 15.8 contains a non-publicity provision; clarify permission for any future public integration announcements or distribution. Current research records publicly available documentation, not a claim of approved partner status.
 
 Accountant eligibility remains unanswered. These matters belong in the later vendor question/action list. No agreement has been signed or accepted; no credentials or client datasets have been committed.
+
+## Step 2 continued — Retail Data API access
+
+Source: https://code.treez.io/docs/retail-data-api
+Evidence: Page text supplied by user October 23, 2026; page labels itself updated eight months ago.
+
+- AskTreez Retail Data API provides raw reporting data through DOMO as JSON for custom reports.
+- Intended users include retailers and some partners. Business Development qualifies the requesting organization.
+- Access contact: partners@treez.io. Published instructions say to request a CLIENT ID and CLIENT SECRET. These instructions describe the separate Data API; current authentication and applicability of SellTreez V3 migration require confirmation.
+- Data/access support contact: asksupport@treez.io.
+- Access is premium and paid; no dollar amount, billing unit, or minimum term appears on this page. Do not apply SellTreez sandbox/Stock/Invoice prices to Retail Data without confirmation.
+- The page expects API, SQL/query, and analytics skills. Implementation should accommodate the firm's limited Python experience through documented setup and a simple staff-operated extraction process; the published skill expectations do not demonstrate that Python specifically is mandatory.
+- Ticketline, Inventory, and Payment tables update incrementally; other tables daily. last_retrieved_timestamp indicates refresh timing. Treez recommends requesting a day's complete available data the following afternoon. Refresh frequency does not establish historical retention or completeness of returns/corrections.
+- Page links to DOMO developer documentation, an API Explorer, and a Postman collection. These may help inspect request structure and schemas, subject to availability; credentials have not been requested.
+
+Access/cost website research status: Published routes and contacts documented. CPA-firm eligibility, current quotes for both services, permissions, contract applicability, and retention remain unresolved for later outreach. Next research topic: V3 authentication, followed by endpoint-specific historical coverage.

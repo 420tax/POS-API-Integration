@@ -2,6 +2,11 @@
 
 Prepared October 23, 2026. Initial research only; no call made.
 
+## Initial access inquiry
+
+Focus the first contact on CPA-firm eligibility, current access pricing, full-year sales/returns/correction coverage, and populated historical METRC package and selling-license information. This inquiry does not require a Journal Entry report, worksheet preparation or QuickBooks implementation. The broader technical questions below are follow-up material.
+
+
 | Call detail | Record |
 | --- | --- |
 | Staff caller / date | |

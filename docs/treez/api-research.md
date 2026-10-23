@@ -40,3 +40,28 @@ Some introductory and partner pages still describe legacy API keys. The current 
 ## Working assessment
 
 Evaluate both SellTreez ticket extraction and Retail Data reporting. No API has been selected. Python extraction feeding Power Query remains a proposed implementation, subject to verified data coverage and validation against existing reports.
+
+## Step 2 — Access requirements: support article review
+
+Source: https://support.treez.io/en/articles/9129351-requesting-api-access-for-treez-apis
+Evidence: Full article supplied by user on October 23, 2026; consistent with the previously reviewed official page.
+
+### Confirmed from the article
+
+- Treez permits approved third-party partners and customer-maintained internal integrations.
+- New access uses V3 certificate-based authentication and self-signed JWTs. Treez assigns organization, dispensary, and endpoint permissions and provides the Organization ID.
+- A registered partner certificate can cover additional authorized client organizations and dispensaries without a new certificate per client.
+- For an existing registered partner, an authorized client user requests access through Treez's Need Help? > Chat with Support. Required details: customer URL, application/integration partner, customer contact name and email, and partner contact name and email. Existing Certificate ID may also be supplied.
+- Treez verifies authorization and the registered certificate before configuring access. An unregistered partner must complete certificate registration first.
+- Internal registration requires an RSA key pair, public certificate submission, and identification of the required organization, dispensary, and endpoints. Private keys must remain confidential and must not be supplied to Treez or committed to GitHub.
+- Technical contact: api-support@treez.io or Treez Support.
+
+### Not answered by this article
+
+- Whether an outside CPA firm may develop and maintain an integration under a client's internal-integration authorization, or must become an approved partner.
+- Partner onboarding/certification requirements specifically applicable to a read-only accounting integration.
+- SellTreez access fees, setup fees, recurring fees, and minimum subscription requirements. Absence of pricing is not evidence that access is free.
+- Availability of read-only permissions for all required endpoints.
+- Whether the separate Retail Data API follows this certificate process.
+
+These gaps are retained for the later consolidated action list. No client or vendor outreach has been performed.

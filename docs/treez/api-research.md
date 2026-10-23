@@ -172,3 +172,18 @@ Evidence: Page text and displayed test response supplied by user October 23, 202
 - The displayed error object is not a ticket response schema. The collapsed 200 response is described only as an object in the supplied text; no successful response fields were supplied.
 
 Next website check: Get by last updated date, to establish its distinct date restrictions. Do not retry live calls until valid authorized access and actual request parameters are available.
+
+## Step 4 continued — Last-updated endpoint
+
+Source: User-supplied V3 Get by last updated date page, October 23, 2026 (linked from the close-date reference).
+
+- GET /dispensary/v3/{dispensary}/ticket/lastUpdated/after/{date}/page/{page}/pagesize/{pagesize}
+- Required date is a date-time in ISO 8601 format YYYY-MM-DDThh:mm:ss.sss±hh:mm, including a UTC offset. Required dispensary, page, and pagesize are also listed.
+- Optional full_decimals and permission-restricted include_cost are documented.
+- The description says tickets closed on the specified date, which conflicts with the lastUpdated/after route and page title. Treat this as an apparent documentation error; exact update selection semantics need confirmation.
+- This supplied V3 page does not state a 30-day lookback limit, historical retention, maximum page size, starting page number, or pagination completion rule. Older/general Ticket API documentation previously reviewed states a 30-day restriction for last-updated retrieval; its applicability to current V3 remains unconfirmed. Do not infer either unlimited history or a confirmed V3 30-day limit from this page.
+- Displayed HTTP 401 response again used literal placeholder path values and no Authorization header was shown. No authenticated extraction, historical coverage test, or successful response schema was obtained.
+
+Potential future use: capture changed tickets after an extraction checkpoint, subject to verified semantics, pagination stability, and lookback restrictions. Initial full-year extraction remains dependent on verified backfill coverage.
+
+Next website evidence: Ticket API overview/general limitations, followed by a published sample ticket response. Record legacy-versus-V3 applicability explicitly.

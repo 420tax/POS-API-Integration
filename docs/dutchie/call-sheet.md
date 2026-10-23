@@ -61,3 +61,13 @@ Staff need not solve coding details during the call. Ask the representative to r
 Do not put keys or live client data in GitHub. No paid signup, contract acceptance or production posting is authorized by this call sheet.
 
 References: [research](api-research.md), [action list](TODO.md), [pilot specification](extraction-specification.md).
+
+## Research update — narrow the questions before calling
+
+Public documentation now identifies the candidate package field, a scheduled Excel report route, an accounting-oriented Journal Entry report, published MCP pricing and key revocation. See the [research addendum](api-research.md#deeper-public-research--october-23-2026).
+
+For question 6, ask whether the documented package identifier is populated historically and represents the actual Michigan METRC tag at sale, including depleted packages. Do not ask as though no package field is documented.
+
+For question 2, distinguish POS API access costs from the separately documented MCP connection price. Ask about provisioned availability and relevant limits rather than asking Dutchie to repeat its MCP price.
+
+Vendor contact is for unresolved eligibility, commercial terms and technical gaps; client samples and authorized tests can answer many validation questions.

@@ -87,3 +87,10 @@ Completion evidence: Reviewed reconciliation with explained differences, retaine
 ## Immediate handoff
 
 Next human action: James or designated staff should contact Treez using sections 1–2. API selection, paid signup, client access provisioning and live completeness testing cannot be completed from public documentation alone.
+
+## Preparation completed while vendor outreach is pending
+
+- [x] Draft desired output tables, staff workflow, data types and acceptance checks: [extraction-specification.md](extraction-specification.md).
+- [ ] After vendor answers arrive, map verified API fields to this specification and resolve the listed gaps before coding.
+
+Vendor/client contact tasks above remain open; recording this specification does not mean access or integration testing is complete.

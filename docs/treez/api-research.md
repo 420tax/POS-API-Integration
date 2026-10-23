@@ -85,3 +85,29 @@ Treez advises developing and testing in the sandbox before requesting production
 Documentation discrepancy: The page still says customers request an API Key after approval and links to an older support article. Current access guidance instead requires V3 certificate registration and authorization. Preserve the onboarding requirements as published, but use current V3 guidance for authentication; ask Treez to confirm the current onboarding sequence.
 
 Next website research: Read the API Usage Agreement for eligibility, permitted accounting use, client authorization, fees, data handling, and support obligations. No agreements have been accepted and no application or survey has been submitted.
+
+## Step 2 continued — API Usage Agreement and published fees
+
+Source: https://code.treez.io/page/legal
+Evidence: User-supplied agreement text and official page reviewed October 23, 2026. Findings below describe published terms, not acceptance of them or a determination of enforceability.
+
+Exhibit B is labeled January 2025. These are published historical schedule amounts, not a current quote for our proposed integration:
+
+| Item | Published charge |
+| --- | --- |
+| Development environment | $500/month per client_id |
+| Stock API premium access | $200/month per client_id per unique instance |
+| Invoice API premium access | $100/month per client_id per unique instance |
+| Usage beyond initial 100,000 monthly calls | $25 per additional 100,000 calls |
+
+Section 4.7 also references the applicable Order Form. Confirm current V3 pricing, how client_id maps to V3 registration, overage billing increments/aggregation, whether sandbox charges continue after development, and whether internal read-only integrations have different terms. Do not treat $500 as a confirmed production-access fee or assume Stock/Invoice endpoints are required for this project. Retail Data API pricing remains unresolved.
+
+Relevant published provisions for follow-up:
+
+- Sections 2.1 and 5.1 restrict permitted data use/storage and require strong encryption for stored data; personal information has additional consent restrictions.
+- Section 4.5(h) restricts extracting data to enhance third-party data files without prior written consent; 4.5(l) restricts modification of Customer Data. Obtain express confirmation of permitted local normalization, Excel/Power Query reconciliation, and CPA workpaper outputs rather than assuming these provisions prohibit or authorize our workflow.
+- Sections 5.2 and 7.4 address deletion at termination; 5.2 contains a law/government-obligation exception while 7.4 does not restate it. Clarify retention of source extracts, derived reconciliations, workpapers, and backups after API access ends.
+- Section 4.8 and section 12 place application operation/support responsibilities on the integrator. Section 9 requires a user agreement and privacy policy when offering an application outside the organization. Applicability to a staff-operated accounting extractor remains to be confirmed.
+- Section 6.2 specifies security-incident reporting within three business days. Section 15.8 contains a non-publicity provision; clarify permission for any future public integration announcements or distribution. Current research records publicly available documentation, not a claim of approved partner status.
+
+Accountant eligibility remains unanswered. These matters belong in the later vendor question/action list. No agreement has been signed or accepted; no credentials or client datasets have been committed.

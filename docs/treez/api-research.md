@@ -286,3 +286,17 @@ These filters show medical inventory and retail-license filtering capabilities; 
 Two web search engines returned no matches linking ticket inventory_id/inventory_batch_id to METRC or retail IDs. This limited search result is not proof the relationship is undocumented everywhere. A successful V3 ticket response/schema or vendor clarification is still needed.
 
 Topic outcome: METRC-specific inventory lookup exists; an end-to-end historical sales-line-to-tag join remains unverified. No task for staff is required to retrieve these public pages. Retain unresolved join, history, cardinality, and pricing questions for consolidated follow-up.
+
+## Step 7 — Ticket history, refund linkage, and additional V3 schema evidence
+
+Independent public research October 23, 2026:
+
+- https://code.treez.io/reference/ticket-get-history-by-id
+- https://code.treez.io/reference/ticket-get-by-order-number
+- https://code.treez.io/reference/ticket-get-by-id
+
+The history endpoint GET /dispensary/v3/{dispensary}/ticket/history/{ticket_id} explicitly returns ticket history. Search-indexed official documentation exposes event fields status, description, date, user, userId, employeeNumber. Example events track fulfillment and payment status. This is evidence of an event log, not proof of historical line-item/amount snapshots or a complete correction ledger. Retention and refund/void event coverage remain unknown.
+
+The official order-number page's search-indexed response schema additionally exposes refund_ticket_ids, items[].id, and items[].reward_dollars, unlike the older uploaded sample. Direct page retrieval returns a reduced view without the expanded schema. Treat these as published schema candidates requiring live verification: items[].id may supply the missing line identifier, but its uniqueness scope and persistence are undocumented; refund_ticket_ids suggests original-to-refund linkage, but its type, completeness, and partial-refund behavior must be tested. reward_dollars needs definition and reconciliation to discounts and Net Sales.
+
+Updated status: Earlier findings that no line ID was shown refer to the uploaded older sample, not an assertion that current V3 lacks one. No production extraction has occurred. The data route remains promising, with historical coverage, METRC joins, and refund/correction completeness as validation gates.
